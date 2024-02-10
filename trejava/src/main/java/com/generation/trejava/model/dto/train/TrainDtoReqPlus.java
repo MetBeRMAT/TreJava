@@ -20,4 +20,5 @@ public class TrainDtoReqPlus extends TrainDtoBase
     private int nTotTratte;
     private int nTotKm;
     private int nTotTempo;
+    private int averageTrain;
 }

@@ -27,7 +27,7 @@ public class Train
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int serial_number;
+    private String serial_number;
     private String type;
     private int average_speed, capacity;
 

@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class TrainDtoBase 
 {
-    private int serial_number;
+    private String serial_number;
     private String type;
     private int average_speed, capacity;
 }

@@ -1,6 +1,7 @@
 package com.generation.trejava.model.dtoservices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.generation.trejava.model.dto.line.LineDtoReqPlus;
 import com.generation.trejava.model.dto.ticket.TicketDtoReqPlus;
@@ -9,6 +10,7 @@ import com.generation.trejava.model.entities.Ticket;
 import com.generation.trejava.model.repositories.LineRepository;
 import com.generation.trejava.model.repositories.PassengerRepository;
 
+@Service
 public class TicketConverter 
 {
     @Autowired
@@ -18,7 +20,7 @@ public class TicketConverter
     @Autowired
     LineConverter lConv;
 
-    public Ticket dtoResToPassenger(TicketDtoRes dto)
+    public Ticket dtoResToTicket(TicketDtoRes dto)
     {
         return  Ticket
                 .builder()
@@ -40,8 +42,6 @@ public class TicketConverter
                 .base_price(t.getBase_price())
                 .passenger(pRepo.findById(t.getPassenger().getId()).get())
                 .line(lRepo.findById(t.getLine().getId()).get())
-                .passenger(t.getPassenger())
-                .line(t.getLine())
                 .lineDtoReqPlus(lineFull)
                 .price(priceForPassenger(t))
                 .passengerName(t.getPassenger().getName())

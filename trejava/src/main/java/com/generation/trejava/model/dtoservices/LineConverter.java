@@ -3,15 +3,17 @@ package com.generation.trejava.model.dtoservices;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.generation.trejava.model.dto.line.LineDtoReqPlus;
 import com.generation.trejava.model.dto.line.LineDtoRes;
 import com.generation.trejava.model.entities.Line;
 import com.generation.trejava.model.repositories.TrainRepository;
 
+@Service
 public class LineConverter 
 {
-    @Autowired
+    @Autowired(required = true)
     TrainRepository repo;
 
     public Line dtoResToLine(LineDtoRes dto)
@@ -45,11 +47,17 @@ public class LineConverter
 
     public int calcDurationOfLine(Line l)
     {
-        return l.getLength()/l.getTrain().getAverage_speed();
+        if(l.getTrain()==null || l.getTrain().getAverage_speed() == 0)
+            return 0;
+
+        return l.getLength()/l.getTrain().getAverage_speed()*60;
     }
 
     public LocalDateTime calcArrivalTime(Line l)
     {
+        if (l.getDeparture_time() == null || l.getTrain() == null || l.getTrain().getAverage_speed() == 0)
+            return null;
+
         return l.getDeparture_time().plusMinutes(calcDurationOfLine(l));
     }
 }

@@ -40,6 +40,9 @@ public class PassengerConverter
 
     public int calcTotalSpending(Passenger p)
     {
+        if(p.getTickets()==null)
+            return 0;
+        
         int res = 0;
 
         for(Ticket t : p.getTickets())
